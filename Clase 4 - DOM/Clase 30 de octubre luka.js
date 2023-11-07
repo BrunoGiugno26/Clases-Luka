@@ -67,28 +67,29 @@ const imagenes = {
     3: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjrf-bGv5HklZ9xfJJJMmqTuBquPIkMWTAo965H8uxgtgYqnB27xQ2aHiAKDICQbK85gaBtC20jfDjrFKPT1Cu5a_Hwy3sa37C6y_ELZxVtJo8JmqTY_EZOvfFgcgHsLbsTq7ocFoIbM--0ZZHNeAx_xX3AnBiG8kmy6uLhyO5mqz2gfngvDM6pTMHhfw/s16000/Peugeot-205-GTI-(1).jpeg"
 }
 
-//*Creamos la funcion para cambiar la imagen
 
 let imagenActual = 1
 let totalImagenes = 3
 
+//*Creamos la funcion para cambiar la imagen
+
 
 function cambairImagen(incremento){
 imagenActual += incremento
-if(imagenActual>totalImagenes){
+if(imagenActual > totalImagenes){
     imagenActual = 1
 }
-if(imagenActual<1){
+if(imagenActual < 1){
     imagenActual = totalImagenes
 }
 const imagen = document.querySelector("#imagen")
-imagen.setAttribute("src",imagenes(imagenActual))
+imagen.setAttribute("src",imagenes[imagenActual])
 }
 
 //Capturamos los Botones
 const botonAnterior = document.querySelector("#boton-anterior")
 const botonSiguiente = document.querySelector("#boton-siguiente")
-
+const div = document.querySelector("div")
 //Crear un evento para cada boton
 
 botonAnterior.addEventListener("click",() => {
@@ -97,4 +98,15 @@ botonAnterior.addEventListener("click",() => {
 
 botonSiguiente.addEventListener("click",() => {
     cambairImagen(1)
+})
+
+// Crear un evento para la imagen
+document.body.addEventListener("keydown",(e) =>{
+    console.log(e)
+    if(e.key === "ArrowLeft"){
+        cambairImagen(-1)
+    }
+    if(e.key === "ArrowRight"){
+        cambairImagen(1)
+    }
 })
