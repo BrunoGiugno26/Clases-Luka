@@ -18,12 +18,43 @@ fetch("https://jsonplaceholder.typicode.com/users")
         const h4 = document.createElement("h4")
         const hr = document.createElement("hr")
 
-        h2.textContent = user.name
-        h4.textContent = user.email
-        hr.textContent = user.name.email
+        //h2.textContent = user.name
+        //h4.textContent = user.email
+        //hr.textContent = user.name.email
 
         document.body.appendChild (h2)
         document.body.appendChild (h4)
         document.body.appendChild (hr)
+    })
+})
+
+fetch('https://jsonplaceholder.typicode.com/posts', {
+  method: 'POST',
+  body: JSON.stringify({
+    title: 'Mi primer post',
+    body: 'haciendo un post desde una solicitud http',
+    userId: 1,
+  }),
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+  },
+})
+  .then((response) => response.json())
+  .then((json) => console.log(json));
+
+  fetch("./data.json")
+  .then((response) => response.json())
+  .then((data) => {
+    data.forEach((product) => {
+        const html =`
+        <div class= "product">
+        <h2>${product.title}</h2>
+        <img src="${product.thumbnail}" alt="${product.title}"/>
+        <p>${product.stock}</p>
+        </div>
+        </hr>
+        `
+
+        document.body.innerHTML += html
     })
 })
